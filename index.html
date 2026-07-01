@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TRNDFY - Boardroom Paid Plan</title>
+<style>
+  :root { --bg:#f4f1fb; --paper:rgba(255,255,255,.84); --ink:#111827; --muted:#5f6472; --line:#ded7ec; --accent:#3b2fb0; --accent2:#c241b6; --dark:#20105e; --radius:22px; --shadow:0 28px 80px rgba(32,16,94,.16); --max:1180px; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; min-height:100%; background:radial-gradient(circle at 8% -8%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 34%), radial-gradient(circle at 96% 4%, color-mix(in srgb, var(--accent2) 16%, transparent), transparent 36%), var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; } button { font:inherit; } img { display:block; max-width:100%; }
+  .wrap { width:min(var(--max), calc(100% - 48px)); margin:0 auto; }
+  .nav { position:relative; z-index:20; height:82px; display:flex; align-items:center; justify-content:space-between; gap:28px; }
+  .brand { font-size:24px; font-weight:900; letter-spacing:-.07em; }
+  .links { display:flex; align-items:center; gap:30px; color:var(--muted); font-size:14px; font-weight:750; }
+  .nav-link { position:relative; display:inline-flex; align-items:center; min-height:44px; transition:color .22s ease, transform .22s ease; }
+  .nav-link:hover { color:var(--dark); transform:translateY(-1px); }
+  .nav-link::after { content:""; position:absolute; left:0; right:0; bottom:4px; height:2px; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent2)); opacity:0; transform:scaleX(.45); transition:opacity .22s ease, transform .22s ease; }
+  .nav-link:hover::after { opacity:1; transform:scaleX(1); }
+  .nav-popover { position:absolute; left:50%; top:calc(100% + 10px); z-index:50; width:260px; padding:15px; border:1px solid rgba(255,255,255,.8); border-radius:18px; background:rgba(255,255,255,.92); color:var(--ink); box-shadow:0 22px 54px rgba(40,30,90,.16); backdrop-filter:blur(18px); opacity:0; pointer-events:none; transform:translate(-50%,-8px) scale(.96); transition:opacity .22s ease, transform .22s cubic-bezier(.2,.9,.2,1); }
+  .nav-popover::before { content:""; position:absolute; left:50%; top:-7px; width:14px; height:14px; border-left:1px solid rgba(255,255,255,.8); border-top:1px solid rgba(255,255,255,.8); background:rgba(255,255,255,.92); transform:translateX(-50%) rotate(45deg); }
+  .nav-link:hover .nav-popover { opacity:1; transform:translate(-50%,0) scale(1); }
+  .nav-popover strong { display:block; color:var(--dark); font-size:13px; letter-spacing:-.02em; }
+  .nav-popover span { display:block; margin-top:6px; color:var(--muted); font-size:12px; line-height:1.42; }
+  .platform-mini { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:10px; }
+  .platform-mini span { min-height:36px; display:flex; align-items:center; justify-content:center; margin:0; padding:7px; border:1px solid var(--line); border-radius:12px; background:#fff; color:var(--dark); font-size:11px; font-weight:900; }
+  .platform-mini img { max-width:74px; max-height:20px; object-fit:contain; }
+  .nav-action { min-height:42px; padding:0 18px; border:1px solid var(--line); border-radius:999px; background:var(--paper); color:var(--dark); cursor:pointer; font-weight:850; box-shadow:0 10px 28px rgba(40,30,90,.08); transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+  .nav-action:hover { transform:translateY(-2px); border-color:color-mix(in srgb, var(--accent) 42%, var(--line)); box-shadow:0 16px 34px rgba(40,30,90,.12); }
+  .hero { display:grid; grid-template-columns:minmax(0,.92fr) minmax(450px,1.08fr); gap:58px; align-items:center; padding:64px 0 78px; }
+  .eyebrow { display:inline-flex; align-items:center; gap:10px; margin:0 0 18px; color:var(--dark); font-size:12px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
+  .eyebrow::before { content:""; width:36px; height:2px; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+  h1 { max-width:680px; margin:0; font-size:clamp(46px,6.2vw,76px); line-height:.96; letter-spacing:-.065em; }
+  .lead { max-width:590px; margin:24px 0 0; color:var(--muted); font-size:20px; line-height:1.52; }
+  .cta-row { display:flex; align-items:center; flex-wrap:wrap; gap:13px; margin-top:32px; }
+  .primary, .secondary { min-height:50px; padding:0 24px; border-radius:999px; cursor:pointer; font-weight:850; }
+  .primary { border:0; background:linear-gradient(135deg,var(--dark),var(--accent2)); color:#fff; box-shadow:0 16px 34px color-mix(in srgb, var(--accent) 28%, transparent); }
+  .secondary { border:1px solid var(--line); background:var(--paper); color:var(--dark); }
+  .contact-email { position:relative; isolation:isolate; display:inline-flex; align-items:center; gap:10px; overflow:hidden; user-select:text; transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+  .contact-email:hover { transform:translateY(-2px); border-color:color-mix(in srgb, var(--accent) 42%, var(--line)); box-shadow:0 16px 34px rgba(40,30,90,.12); }
+  .contact-email::before { content:""; position:absolute; inset:-2px; z-index:0; opacity:0; pointer-events:none; }
+  .email-text { position:relative; z-index:1; }
+  .copy-icon { position:relative; z-index:1; display:grid; width:28px; height:28px; place-items:center; border:1px solid color-mix(in srgb, var(--accent) 20%, var(--line)); border-radius:999px; color:var(--accent); background:rgba(255,255,255,.72); box-shadow:inset 0 1px 0 rgba(255,255,255,.85); transition:transform .24s cubic-bezier(.2,.9,.2,1), color .22s ease, background .22s ease, border-color .22s ease; }
+  .copy-icon svg { width:15px; height:15px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .contact-email:hover .copy-icon { transform:translateX(2px) rotate(-5deg) scale(1.08); border-color:color-mix(in srgb, var(--accent) 52%, var(--line)); color:#fff; background:linear-gradient(135deg,var(--accent),var(--accent2)); }
+  .contact-email.is-copied .copy-icon { transform:scale(1.12); color:#fff; background:linear-gradient(135deg,var(--dark),var(--accent2)); }
+  .contact-email.fx-signal { animation:signalLock 1.05s cubic-bezier(.18,.82,.24,1); background:linear-gradient(135deg,#fff,color-mix(in srgb,var(--accent) 9%,#fff)); }
+  .contact-email.fx-signal::before { opacity:1; background:linear-gradient(90deg, transparent 0 18%, rgba(59,47,176,.16) 18% 20%, transparent 20% 34%, rgba(194,65,182,.18) 34% 36%, transparent 36% 54%, rgba(59,47,176,.13) 54% 56%, transparent 56%), linear-gradient(90deg, transparent, rgba(194,65,182,.22), transparent); animation:signalBars 1.05s ease-out forwards; }
+  @keyframes signalLock { 0%{letter-spacing:-.02em; transform:skewX(-4deg);} 18%{letter-spacing:.06em; transform:skewX(3deg);} 36%{letter-spacing:-.01em; transform:skewX(-2deg);} 78%{letter-spacing:0; transform:skewX(0);} 100%{letter-spacing:0; transform:skewX(0);} }
+  @keyframes signalBars { 0%{transform:translateX(-55%); opacity:.85;} 48%{transform:translateX(8%); opacity:.72;} 72%{transform:translateX(28%); opacity:.18;} 100%{transform:translateX(38%); opacity:0;} }
+  .trust { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:34px; max-width:620px; }
+  .trust-card { min-height:88px; padding:16px; border:1px solid var(--line); border-radius:calc(var(--radius) - 6px); background:var(--paper); box-shadow:0 12px 30px rgba(40,30,90,.07); }
+  .trust-card strong { display:block; font-size:21px; letter-spacing:-.045em; white-space:nowrap; } .trust-card strong .prefix { display:inline; margin-top:0; color:inherit; font-size:.72em; font-weight:750; letter-spacing:-.02em; line-height:inherit; } .trust-card span { display:block; margin-top:5px; color:var(--muted); font-size:13px; line-height:1.35; }
+  .visual { position:relative; }
+  .image-panel { position:relative; overflow:hidden; border:1px solid rgba(255,255,255,.72); border-radius:var(--radius); background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:var(--shadow); }
+  .image-panel img { width:100%; min-height:430px; object-fit:cover; }
+  .insight-card { position:absolute; left:-26px; bottom:28px; z-index:2; width:min(330px,72%); padding:18px; border:1px solid rgba(255,255,255,.78); border-radius:calc(var(--radius) - 8px); background:rgba(255,255,255,.9); backdrop-filter:blur(18px); box-shadow:0 22px 44px rgba(40,30,90,.16); transition:transform .28s cubic-bezier(.2,.9,.2,1), border-color .28s ease, box-shadow .28s ease; }
+  .insight-card.is-linked { transform:translateY(-8px) scale(1.035); border-color:color-mix(in srgb,var(--accent) 34%,rgba(255,255,255,.78)); box-shadow:0 28px 64px rgba(59,47,176,.24); }
+  .insight-card span { color:var(--muted); font-size:12px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; } .insight-card strong { display:block; margin-top:7px; font-size:24px; line-height:1.08; letter-spacing:-.045em; } .insight-card p { margin:9px 0 0; color:var(--muted); font-size:13px; line-height:1.45; }
+  .channel-strip { margin-top:24px; padding:18px; border:1px solid var(--line); border-radius:calc(var(--radius) - 4px); background:var(--paper); box-shadow:0 14px 34px rgba(40,30,90,.08); }
+  .channel-strip h2 { margin:0 0 14px; color:var(--muted); font-size:12px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
+  .mobile-label, .mobile-channel { display:none; }
+  .channels { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; } .channel { min-height:74px; display:flex; align-items:center; justify-content:center; padding:14px; border:1px solid var(--line); border-radius:calc(var(--radius) - 10px); background:#fff; } .channel img { max-width:116px; max-height:34px; object-fit:contain; } .channel.is-square img { max-width:36px; max-height:36px; }
+  .services { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding-bottom:56px; }
+  .service { padding:26px; border:1px solid var(--line); border-radius:calc(var(--radius) - 2px); background:var(--paper); box-shadow:0 14px 36px rgba(40,30,90,.07); }
+  .service small { color:var(--accent); font-size:12px; font-weight:900; letter-spacing:.11em; text-transform:uppercase; } .service h3 { margin:12px 0 9px; font-size:23px; line-height:1.15; letter-spacing:-.04em; } .service p { margin:0; color:var(--muted); font-size:15px; line-height:1.52; }
+  .footer { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-top:24px; padding:26px 0 34px; color:var(--muted); font-size:13px; }
+  .footer p { margin:0; }
+  .footer a { color:var(--dark); font-weight:850; }
+  .footer-year { margin-left:7px; font-size:.58em; letter-spacing:-.02em; vertical-align:middle; }
+  @media (max-width:960px) { .hero { grid-template-columns:1fr; gap:42px; padding:42px 0 58px; } .insight-card { left:22px; } .services { grid-template-columns:1fr; } .footer { flex-direction:column; align-items:flex-start; } }
+  @media (max-width:640px) { .wrap { width:min(100% - 30px,var(--max)); } .nav { height:68px; } .links,.nav-action { display:none; } .hero { display:flex; flex-direction:column; gap:0; padding:36px 0 46px; } .hero > div,.visual { display:contents; } .eyebrow { order:1; margin-bottom:14px; } h1 { order:2; } .image-panel { order:3; margin-top:28px; } .image-panel img { min-height:320px; } .insight-card { order:4; position:relative; left:auto; bottom:auto; width:auto; margin:-42px 16px 0; } .lead { order:5; margin-top:26px; font-size:18px; } .cta-row { order:6; margin-top:24px; } .primary,.secondary { width:100%; } .contact-email { justify-content:space-between; } .channel-strip { order:7; margin-top:28px; } .desktop-label { display:none; } .mobile-label { display:inline; } .mobile-channel { display:flex; } .channels { grid-template-columns:repeat(2,1fr); } .trust { order:8; grid-template-columns:1fr; margin-top:24px; } .footer { align-items:center; justify-content:center; text-align:center; } }
+</style>
+</head>
+<body>
+<header class="wrap nav"><a class="brand" href="#">TRNDFY</a><nav class="links" aria-label="Primary"><a class="nav-link" href="#services" data-strategy-link>Strategy<span class="nav-popover"><strong>Creative testing for every channel.</strong><span>We shape hooks, visuals, and ad copy into fast experiments that turn a song's energy into discovery-ready campaigns.</span></span></a><a class="nav-link" href="#channels">Channels<span class="nav-popover"><strong>Managed channel mix</strong><span>Campaigns are coordinated across paid social and music discovery platforms.</span><span class="platform-mini"><span><img src="images/TikTok_logo.svg" alt="TikTok" /></span><span><img src="images/Logo_of_YouTube_(2015-2017).svg" alt="YouTube" /></span><span><img src="images/Instagram_logo_2022.svg" alt="Instagram" /></span><span><img src="images/Meta_Platforms_Inc._logo.svg" alt="Meta ads" /></span></span></span></a><a class="nav-link" href="#services">Reporting<span class="nav-popover"><strong>Weekly reports, daily artist data.</strong><span>You receive a weekly performance readout, plus Spotify for Artists performance updates on a daily basis.</span></span></a></nav><button class="nav-action" type="button" data-nav-contact>Request growth audit</button></header>
+<main>
+  <section class="wrap hero" aria-label="Boardroom Paid Plan">
+    <div><p class="eyebrow">Paid marketing for labels, artists & distributors</p><h1>Campaign operations your artists can trust.</h1><p class="lead">TRNDFY plans, launches, and optimizes paid extraordinary winning social campaigns for artists, labels, and distributors across the channels where music discovery happens.</p><div class="cta-row"><button class="primary" type="button" data-contact-trigger>Work with us</button><button class="secondary contact-email" type="button" data-copy-email="ads@trndfy.com" aria-label="Copy ads@trndfy.com"><span class="email-text">ads@trndfy.com</span><span class="copy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><path d="M5 15V7a2 2 0 0 1 2-2h8"></path></svg></span></button></div><div class="trust" aria-label="Campaign benchmarks"><div class="trust-card"><strong>From $5,000</strong><span>per song campaign model</span></div><div class="trust-card"><strong><span class="prefix">or</span> Distribution</strong><span>based partnership option</span></div><div class="trust-card"><strong>10B+</strong><span>streams generated in the last 5 years</span></div></div></div>
+    <aside class="visual"><div class="image-panel"><img src="images/Tik-Tok-ads-e-Meta-ads-800x450.png" alt="Meta and TikTok ad platforms on purple and pink display podiums" /></div><div class="insight-card"><span>Media strategy</span><strong>Meta, TikTok, Instagram, and YouTube working from one plan.</strong><p>Hook, visual, and copy tests that turn track energy into feed-native ads for discovery and conversion.</p></div><section class="channel-strip" id="channels" aria-label="Platform logos"><h2><span class="desktop-label">Also managed across</span><span class="mobile-label">Managed across</span></h2><div class="channels"><div class="channel mobile-channel"><img src="images/TikTok_logo.svg" alt="TikTok" /></div><div class="channel"><img src="images/Meta_Platforms_Inc._logo.svg" alt="Meta" /></div><div class="channel is-square"><img src="images/Instagram_logo_2022.svg" alt="Instagram" /></div><div class="channel"><img src="images/Logo_of_YouTube_(2015-2017).svg" alt="YouTube" /></div></div></section></aside>
+  </section>
+</main>
+<footer class="wrap footer"><a class="brand" href="#">TRNDFY<span class="footer-year">x 2026</span></a><a href="mailto:ads@trndfy.com">ads@trndfy.com</a></footer>
+<script>
+  const emailButton = document.querySelector('[data-copy-email]');
+  const contactTrigger = document.querySelector('[data-contact-trigger]');
+  const navContact = document.querySelector('[data-nav-contact]');
+  const strategyLink = document.querySelector('[data-strategy-link]');
+  const insightCard = document.querySelector('.insight-card');
+  const navLinks = [...document.querySelectorAll('.nav-link')];
+
+  function animateEmail(target = emailButton) {
+    target.classList.remove('fx-signal');
+    void target.offsetWidth;
+    target.classList.add('fx-signal');
+    window.setTimeout(() => target.classList.remove('fx-signal'), 1150);
+  }
+
+  function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+  }
+
+  async function copyEmail(target = emailButton) {
+    const email = target.dataset.copyEmail;
+    try {
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        fallbackCopy(email);
+      }
+      target.classList.add('is-copied');
+      target.setAttribute('aria-label', 'Copied ads@trndfy.com');
+      window.setTimeout(() => { target.classList.remove('is-copied'); target.setAttribute('aria-label', 'Copy ads@trndfy.com'); }, 1400);
+    } catch {
+      fallbackCopy(email);
+      target.classList.add('is-copied');
+      target.setAttribute('aria-label', 'Copied ads@trndfy.com');
+      window.setTimeout(() => { target.classList.remove('is-copied'); target.setAttribute('aria-label', 'Copy ads@trndfy.com'); }, 1400);
+    }
+  }
+
+  contactTrigger.addEventListener('click', () => animateEmail());
+  emailButton.addEventListener('click', () => copyEmail(emailButton));
+  navLinks.forEach((link) => link.addEventListener('click', (event) => event.preventDefault()));
+  navContact.addEventListener('click', () => {
+    if (!navContact.dataset.copyEmail) {
+      navContact.className = 'secondary contact-email nav-email';
+      navContact.dataset.copyEmail = 'ads@trndfy.com';
+      navContact.setAttribute('aria-label', 'Copy ads@trndfy.com');
+      navContact.innerHTML = '<span class="email-text">ads@trndfy.com</span><span class="copy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="10" height="10" rx="2"></rect><path d="M5 15V7a2 2 0 0 1 2-2h8"></path></svg></span>';
+      animateEmail(navContact);
+      return;
+    }
+    copyEmail(navContact);
+  });
+  strategyLink.addEventListener('mouseenter', () => insightCard.classList.add('is-linked'));
+  strategyLink.addEventListener('mouseleave', () => insightCard.classList.remove('is-linked'));
+</script>
+</body>
+</html>
