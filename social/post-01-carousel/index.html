@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TRNDFY Instagram Carousel 01</title>
+<style>
+  :root {
+    --bg:#f4f1fb;
+    --paper:rgba(255,255,255,.86);
+    --ink:#111827;
+    --muted:#5f6472;
+    --line:#ded7ec;
+    --accent:#3b2fb0;
+    --accent2:#c241b6;
+    --dark:#20105e;
+    --radius:44px;
+    --shadow:0 34px 92px rgba(32,16,94,.18);
+    --sans:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  * { box-sizing:border-box; }
+  html, body { margin:0; min-height:100%; font-family:var(--sans); color:var(--ink); background:#ece8f7; -webkit-font-smoothing:antialiased; }
+  body { display:grid; place-items:start center; padding:40px; }
+  img { display:block; max-width:100%; }
+  .deck { display:grid; grid-template-columns:repeat(2, minmax(320px, 540px)); gap:30px; }
+  .slide {
+    position:relative;
+    width:1080px;
+    height:1350px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 5% -5%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 36%),
+      radial-gradient(circle at 102% 0%, color-mix(in srgb, var(--accent2) 22%, transparent), transparent 38%),
+      linear-gradient(135deg,#f8f5ff 0%,#f0ecfb 58%,#f8edf9 100%);
+    border-radius:0;
+    box-shadow:0 24px 70px rgba(20,15,55,.16);
+  }
+  .slide::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,255,255,.48),transparent 38%,rgba(255,255,255,.2));
+  }
+  .inner { position:absolute; inset:72px; z-index:2; display:flex; flex-direction:column; }
+  .brand { display:flex; align-items:center; justify-content:space-between; gap:24px; font-size:34px; font-weight:950; letter-spacing:-.08em; color:var(--ink); }
+  .tag { display:inline-flex; align-items:center; gap:14px; color:var(--dark); font-size:18px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
+  .tag::before { content:""; width:56px; height:3px; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+  h1, h2, p { margin:0; }
+  .headline { margin-top:78px; font-size:104px; line-height:.91; letter-spacing:-.075em; font-weight:950; max-width:880px; }
+  .headline.small { font-size:86px; max-width:900px; }
+  .lead { margin-top:34px; color:var(--muted); font-size:34px; line-height:1.22; max-width:760px; font-weight:650; letter-spacing:-.035em; }
+  .gradient-word { background:linear-gradient(135deg,var(--dark),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .visual-card {
+    margin-top:auto;
+    border:1px solid rgba(255,255,255,.82);
+    border-radius:var(--radius);
+    background:var(--paper);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .hero-image { height:470px; background:linear-gradient(135deg,var(--accent),var(--accent2)); }
+  .hero-image img { width:100%; height:100%; object-fit:cover; }
+  .caption-card {
+    position:absolute;
+    right:72px;
+    bottom:170px;
+    width:430px;
+    padding:32px;
+    border:1px solid rgba(255,255,255,.82);
+    border-radius:28px;
+    background:rgba(255,255,255,.9);
+    box-shadow:0 22px 54px rgba(40,30,90,.16);
+  }
+  .caption-card small { display:block; color:var(--muted); font-size:15px; font-weight:950; letter-spacing:.14em; text-transform:uppercase; }
+  .caption-card strong { display:block; margin-top:12px; color:var(--ink); font-size:33px; line-height:1; letter-spacing:-.055em; }
+  .footer { position:absolute; left:72px; right:72px; bottom:56px; z-index:3; display:flex; align-items:center; justify-content:space-between; color:var(--dark); font-size:22px; font-weight:900; letter-spacing:-.04em; }
+  .count { color:var(--muted); font-size:16px; letter-spacing:.12em; text-transform:uppercase; }
+  .pill-row { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:auto; }
+  .pill {
+    min-height:178px;
+    padding:30px;
+    border:1px solid var(--line);
+    border-radius:30px;
+    background:rgba(255,255,255,.84);
+    box-shadow:0 16px 36px rgba(40,30,90,.08);
+  }
+  .pill small { display:block; color:var(--accent); font-size:16px; font-weight:950; letter-spacing:.12em; text-transform:uppercase; }
+  .pill strong { display:block; margin-top:14px; font-size:39px; line-height:1; letter-spacing:-.06em; }
+  .pill span { display:block; margin-top:14px; color:var(--muted); font-size:22px; line-height:1.18; font-weight:650; letter-spacing:-.03em; }
+  .platforms { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:auto; }
+  .platform {
+    min-height:190px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    padding:28px;
+    border:1px solid var(--line);
+    border-radius:32px;
+    background:#fff;
+    box-shadow:0 18px 40px rgba(40,30,90,.08);
+  }
+  .platform img { max-width:210px; max-height:58px; object-fit:contain; }
+  .platform .icon { max-width:54px; max-height:54px; }
+  .platform .name { color:var(--ink); font-size:38px; font-weight:950; letter-spacing:-.065em; }
+  .steps { display:grid; gap:24px; margin-top:auto; }
+  .step {
+    display:grid;
+    grid-template-columns:86px 1fr;
+    gap:24px;
+    align-items:start;
+    min-height:146px;
+    padding:28px;
+    border:1px solid var(--line);
+    border-radius:30px;
+    background:rgba(255,255,255,.84);
+    box-shadow:0 16px 36px rgba(40,30,90,.08);
+  }
+  .num { display:grid; place-items:center; width:72px; height:72px; border-radius:999px; color:#fff; background:linear-gradient(135deg,var(--dark),var(--accent2)); font-size:24px; font-weight:950; }
+  .step strong { display:block; font-size:35px; line-height:1; letter-spacing:-.055em; }
+  .step span { display:block; margin-top:10px; color:var(--muted); font-size:22px; line-height:1.2; font-weight:650; letter-spacing:-.03em; }
+  .proof {
+    margin-top:auto;
+    display:grid;
+    gap:22px;
+  }
+  .stat {
+    padding:44px;
+    border-radius:38px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--dark),var(--accent2));
+    box-shadow:var(--shadow);
+  }
+  .stat strong { display:block; font-size:132px; line-height:.86; letter-spacing:-.08em; }
+  .stat span { display:block; margin-top:22px; font-size:30px; line-height:1.16; font-weight:750; letter-spacing:-.035em; color:rgba(255,255,255,.84); }
+  .mini-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  .mini { padding:26px; min-height:128px; border:1px solid var(--line); border-radius:26px; background:rgba(255,255,255,.88); }
+  .mini strong { font-size:32px; line-height:1; letter-spacing:-.055em; }
+  .mini span { display:block; margin-top:10px; color:var(--muted); font-size:19px; line-height:1.2; font-weight:650; }
+  .cta-card {
+    margin-top:auto;
+    padding:54px;
+    border-radius:44px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--dark),var(--accent2));
+    box-shadow:var(--shadow);
+  }
+  .cta-slide .cta-card { margin-top:440px; }
+  .cta-card h2 { font-size:82px; line-height:.94; letter-spacing:-.075em; }
+  .cta-card p { margin-top:28px; color:rgba(255,255,255,.84); font-size:31px; line-height:1.18; font-weight:650; letter-spacing:-.035em; max-width:780px; }
+  .email-pill { display:inline-flex; margin-top:44px; min-height:78px; align-items:center; padding:0 36px; border-radius:999px; background:#fff; color:var(--dark); font-size:28px; font-weight:950; letter-spacing:-.04em; }
+  .notes { margin-top:26px; color:var(--muted); font-size:20px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+
+  body.export { padding:0; display:block; background:transparent; }
+  body.export .deck { display:block; }
+  body.export .slide { display:none; box-shadow:none; }
+  body.export .slide.active { display:block; }
+  @media (max-width:1200px) {
+    body:not(.export) { padding:20px; }
+    body:not(.export) .deck { grid-template-columns:1fr; }
+    body:not(.export) .slide { transform-origin:top left; transform:scale(.5); margin-bottom:-675px; }
+  }
+</style>
+</head>
+<body>
+<main class="deck">
+  <section class="slide" data-slide="1">
+    <div class="inner">
+      <div class="brand"><span>TRNDFY</span><span class="count">01 / 06</span></div>
+      <div class="tag" style="margin-top:82px">Paid music marketing</div>
+      <h1 class="headline">Your song needs a <span class="gradient-word">campaign</span>, not posts.</h1>
+      <p class="lead">Release growth happens when creative, audience, platform, and reporting work from one plan.</p>
+      <div class="visual-card hero-image"><img src="../../images/Tik-Tok-ads-e-Meta-ads-800x450.png" alt="Meta and TikTok ad platforms" /></div>
+      <div class="caption-card"><small>Campaign operations</small><strong>Built for artists, labels & distributors.</strong></div>
+    </div>
+    <div class="footer"><span>ads@trndfy.com</span><span>@trndfy</span></div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <div class="inner">
+      <div class="brand"><span>TRNDFY</span><span class="count">02 / 06</span></div>
+      <div class="tag" style="margin-top:82px">The mistake</div>
+      <h2 class="headline small">Uploading everywhere is not a release strategy.</h2>
+      <p class="lead">A track needs structure before budget goes live.</p>
+      <div class="pill-row">
+        <div class="pill"><small>01</small><strong>Hook</strong><span>What makes someone stop scrolling?</span></div>
+        <div class="pill"><small>02</small><strong>Audience</strong><span>Who should hear it first?</span></div>
+        <div class="pill"><small>03</small><strong>Platform</strong><span>Where does the record naturally travel?</span></div>
+        <div class="pill"><small>04</small><strong>Reporting</strong><span>What tells us the campaign is working?</span></div>
+      </div>
+    </div>
+    <div class="footer"><span>Campaigns before content calendars.</span><span class="count">Swipe</span></div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <div class="inner">
+      <div class="brand"><span>TRNDFY</span><span class="count">03 / 06</span></div>
+      <div class="tag" style="margin-top:82px">Channel mix</div>
+      <h2 class="headline small">One plan across the platforms where music moves.</h2>
+      <div class="platforms">
+        <div class="platform"><img src="../../images/TikTok_logo.svg" alt="TikTok" /></div>
+        <div class="platform"><img src="../../images/Meta_Platforms_Inc._logo.svg" alt="Meta" /></div>
+        <div class="platform"><img class="icon" src="../../images/Instagram_logo_2022.svg" alt="Instagram" /><span class="name">Instagram</span></div>
+        <div class="platform"><img src="../../images/Logo_of_YouTube_(2015-2017).svg" alt="YouTube" /></div>
+      </div>
+    </div>
+    <div class="footer"><span>Meta · TikTok · Instagram · YouTube</span><span class="count">03 / 06</span></div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <div class="inner">
+      <div class="brand"><span>TRNDFY</span><span class="count">04 / 06</span></div>
+      <div class="tag" style="margin-top:82px">What we test</div>
+      <h2 class="headline small">Creative testing turns a song into discovery.</h2>
+      <div class="steps">
+        <div class="step"><div class="num">01</div><div><strong>Hooks</strong><span>The first three seconds, rewritten until the song earns attention.</span></div></div>
+        <div class="step"><div class="num">02</div><div><strong>Visuals</strong><span>Artist clips, artwork, UGC, live footage, and feed-native edits.</span></div></div>
+        <div class="step"><div class="num">03</div><div><strong>Copy</strong><span>Angles that connect the record to a listener’s actual taste.</span></div></div>
+      </div>
+    </div>
+    <div class="footer"><span>Hook · visual · copy · audience</span><span class="count">04 / 06</span></div>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <div class="inner">
+      <div class="brand"><span>TRNDFY</span><span class="count">05 / 06</span></div>
+      <div class="tag" style="margin-top:82px">Why labels trust it</div>
+      <h2 class="headline small">Paid marketing should feel operational, not random.</h2>
+      <div class="proof">
+        <div class="stat"><strong>10B+</strong><span>streams generated in the last 5 years.</span></div>
+        <div class="mini-grid">
+          <div class="mini"><strong>Weekly</strong><span>performance reporting.</span></div>
+          <div class="mini"><strong>Daily</strong><span>Spotify for Artists reads.</span></div>
+          <div class="mini"><strong>$5k+</strong><span>per song campaign model.</span></div>
+          <div class="mini"><strong>Partner</strong><span>distribution-based option.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>Campaign operations your artists can trust.</span><span class="count">05 / 06</span></div>
+  </section>
+
+  <section class="slide cta-slide" data-slide="6">
+    <div class="inner">
+      <div class="brand"><span>TRNDFY</span><span class="count">06 / 06</span></div>
+      <div class="tag" style="margin-top:82px">Planning a serious release?</div>
+      <div class="cta-card">
+        <h2>Send us the record before the budget goes live.</h2>
+        <p>We’ll look at the song, platform fit, creative angles, and campaign structure.</p>
+        <div class="email-pill">ads@trndfy.com</div>
+      </div>
+    </div>
+    <div class="footer"><span>Artists · labels · distributors</span><span>@trndfy</span></div>
+  </section>
+</main>
+<script>
+  const slide = new URLSearchParams(window.location.search).get("slide");
+  if (slide) {
+    document.body.classList.add("export");
+    document.querySelector(`[data-slide="${slide}"]`)?.classList.add("active");
+  }
+</script>
+</body>
+</html>
