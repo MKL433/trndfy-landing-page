@@ -12,8 +12,7 @@ This carousel translates the current TRNDFY landing page positioning into a clea
 - `exports/slide-02.png` — problem framing
 - `exports/slide-03.png` — campaign planning framework
 - `exports/slide-04.png` — platform mix
-- `exports/slide-05.png` — proof point
-- `exports/slide-06.png` — CTA
+- `exports/slide-05.png` — CTA
 
 All exports are `1080x1350` PNG files.
 
@@ -32,7 +31,7 @@ DM `CAMPAIGN` or email `ads@trndfy.com`.
 From the repository root:
 
 ```bash
-for i in 1 2 3 4 5 6; do
+for i in 1 2 3 4 5; do
   google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
     --window-size=1080,1350 \
     --screenshot="social/post-01-carousel/exports/slide-0${i}.png" \
