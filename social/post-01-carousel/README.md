@@ -4,15 +4,15 @@
 
 **Hook:** Your song needs a campaign, not posts.
 
-This carousel translates the current TRNDFY landing page positioning into a feed post: premium, data-driven campaign operations for artists, labels, and distributors.
+This carousel translates the current TRNDFY landing page positioning into a cleaner feed post: premium, data-driven campaign operations for artists, labels, and distributors. The layout is intentionally minimal, with one idea per slide, large safe margins, high-contrast typography, and very few decorative elements.
 
 ## Exported Slides
 
 - `exports/slide-01.png` — cover / positioning
 - `exports/slide-02.png` — problem framing
-- `exports/slide-03.png` — platform mix
-- `exports/slide-04.png` — creative testing
-- `exports/slide-05.png` — proof / operations
+- `exports/slide-03.png` — campaign planning framework
+- `exports/slide-04.png` — platform mix
+- `exports/slide-05.png` — proof point
 - `exports/slide-06.png` — CTA
 
 All exports are `1080x1350` PNG files.
